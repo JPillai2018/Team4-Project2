@@ -1,0 +1,11 @@
+CREATE DATABASE secure;
+USE secure;
+
+CREATE TABLE users (
+  id int(11) AUTO_INCREMENT NOT NULL,
+  username VARCHAR(15) NOT NULL UNIQUE,
+  email VARCHAR(100 ) NOT NULL UNIQUE,
+  password BINARY(60) NOT NULL,
+  created_at DATETIME NOT NULL,
+  PRIMARY KEY (id) 
+);
