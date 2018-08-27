@@ -1,0 +1,88 @@
+html {
+    height: 100%;
+    box-sizing: border-box;
+
+  }
+  
+  * {
+    box-sizing: inherit;
+  }
+
+body {
+    position: relative;
+    margin: 0;
+    padding-bottom: 8rem;
+    min-height: 100%;
+    background-color: #e7e8ec;
+    color: #000;
+}
+
+.container-wrap {
+    width: 1250px;
+}
+
+.header {
+    text-align: center;
+    padding-top: 5px;
+}
+
+#register {
+    text-align: center;
+    margin-top: 10px;
+}
+
+#logo {
+    padding-top: 20px;
+}
+
+.bfad {
+    padding-top: 45px;
+}
+
+.navigation {
+    background-color: #074b78;
+}
+
+.nav-link {
+    color: #fff;
+}
+
+.nav-item {
+    text-align: center;
+    padding-left: 35px;
+}
+
+.tabs {
+    padding-left: 30px;
+}
+
+
+.headSubmit {
+    width: 160px;
+    background-color: #392943;
+}
+
+.joinNow {
+    width: 200px;
+    text-align: center;
+}
+
+.dogImg {
+    width: 300px;
+    height: 200px;
+    float: right;
+}
+
+
+footer {
+    position: absolute;
+    border-top: 4px solid #000;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    background-color: #074b78;
+    color: #fff;
+    text-align: center;
+    padding-bottom: 1rem;
+}
