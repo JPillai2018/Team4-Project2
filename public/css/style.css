@@ -1,0 +1,85 @@
+.jumbotron {
+  font-family: Shrikhand, cursive;
+  color: white;
+  color: rgb(253, 236, 76);
+  background-color: #1da1f2;
+  background-color: #80e60d;
+  background-color: #2f8d03;
+}
+
+.btn {
+  background-color: #319114;
+  color: rgb(204, 250, 96);
+  color: rgb(189, 171, 15);
+  width: 80%;
+  position: absolute;
+  margin: auto;
+}
+#wrapper {
+  width: 100%; 
+
+}
+#left {
+
+  float: left;
+}
+#right { 
+
+  float: right;
+}
+
+.lform{
+  background-color: #c2c7bd;
+  padding:10px;
+  margin: 10px;
+}
+
+.loginsingnup {
+  width: 60%;
+  height: 100%;
+  margin: 0 auto;
+  background-color: #fff;
+  background-color: #f1ededcc;
+  padding: 10px 50px 10px 50px;
+  border-radius: 15px;
+  border: 2px solid #cbcbcb;
+  box-shadow: 10px 15px 5px #777;
+
+}
+#loginTitle{
+  text-align: center;
+  color: #175c02;
+  font-size: larger;
+  font-weight: 500;
+}
+#usernameid label{
+  width:  25%;
+}
+#emailid label{
+  width:  25%;
+}
+#emailid #email{
+  width: 70%;
+}
+#passwordid label{
+  width:  25%;
+}
+
+input[type=submit] {
+  padding: 5 10px 5 10px;
+  width: 25%;
+  background-color: #38db06;
+  border:0 none;
+  cursor:pointer;
+  -webkit-border-radius: 5px;
+  border-radius: 5px; 
+}
+
+a h6{
+  color: #175c02;
+}
+
+.btn .btn-light {
+  background-color: #0b08ee;
+  color: #124602;
+}
