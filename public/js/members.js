@@ -271,7 +271,7 @@ $(document).ready(function() {
         blogContainer.empty();
         var messageH2 = $("<h6>");
         messageH2.css({ "text-align": "center", "margin-top": "50px" });
-        messageH2.html("No posts yet for this category, navigate <a href='/members'>here</a> in order to create a new post.");
+        messageH2.html("No posts yet for this category.Please create a new post.");
         blogContainer.append(messageH2);
     }
 
