@@ -10,9 +10,11 @@ $(document).ready(function() {
     var firstTime = "Yes";
     var editPost = "No";
     var newBlogStatus = "";
-    showhideblogwindow();
-    $("#newblogbtn").on("click", showhideblogwindow);
 
+    // Getting the initial list of posts
+    console.log("Going to Get Posts");
+    getAllPosts();
+    console.log("After Getting Posts");
 
     // Gets an optional query string from our url (i.e. ?post_id=23)
     var url = window.location.search;
@@ -31,42 +33,13 @@ $(document).ready(function() {
     var bodyInput = $("#body");
     var titleInput = $("#title");
     var blogForm = $("#blog");
-     // Get email from the session cookies. For now i am hardcoding
-     var blogemail = "jpillai1@gmail.com";
+
     //var postCategorySelect = $("#category");
-    // Giving the postCategorySelect a default value
-    //postCategorySelect.val("Personal");
-    // Adding an event listener for when the form is submitted
-    $(blogForm).on("submit", function handleFormSubmit(event) {
-      event.preventDefault();
-      // Wont submit the post if we are missing a body or a title
-      if (!titleInput.val().trim() || !bodyInput.val().trim()) {
-        return;
-      }
-      // Constructing a newPost object to hand to the database
-      var newPost = {
-        email: blogemail,
-        title: titleInput.val().trim(),
-        body: bodyInput.val().trim()
-      };
-  
-      console.log(newPost);
-  
-      // If we're updating a post run updatePost to update a post
-      // Otherwise run submitPost to create a whole new post
-      if (updating) {
-        newPost.id = postId;
-        updatePost(newPost);
-      }
-      else {
-        submitPost(newPost);
-      }
-    });
-  
     // Submits a new post and brings user to blog page upon completion
     function submitPost(Post) {
       $.post("/api/posts/", Post, function() {
         newPostYes = "No";
+        showhideblogwindow();
         window.location.href = "/blog";
       });
     }
@@ -87,73 +60,24 @@ $(document).ready(function() {
       });
     }
   
-    // Update a given post, bring user to the blog page when done
-    function updatePost(post) {
-      $.ajax({
-        method: "PUT",
-        url: "/api/posts",
-        data: post
-      })
-        .then(function() {
-          window.location.href = "/blog";
-    });
-    }
 
 
 
     // General functions
-    //Function to start the quizz game when Start button is clicked
-    function showhideblogwindow(){
-
-        newBlogStatus = $("#newblogbtn").text();
-        console.log("BlogStatus" + newBlogStatus);
-        if (firstTime === "Yes"){
-            firstTime = "No";
-            $("#newblogbtn").text("+Add New Post");
-            $(".blog-content").css("display", "none");
-            newPostYes = "No";
-        }
-        else
-        {
-            if ((newBlogStatus === "+Add New Post") || (newPostYes=== "No") || (editPost=== "Yes")){
-                $("#newblogbtn").text("-Cancel New Post");
-                $(".blog-content").css("display", "block");
-                newPostYes = "Yes";
-            }
-            else if((newBlogStatus === "-Cancel New Post") || (newBlogStatus === "-Cancel Edit Post")){
-                $("#newblogbtn").text("+Add New Post");
-                $(".blog-content").css("display", "none");
-                newPostYes = "No";
-                $("#title").text("");
-                $("#blog").text("");
-            }
-        }
-        console.log("New Post Button Value = " + newBlogStatus);
-    }
-  
+ 
     // Members Page- Blog Management
     // blogContainer holds all of our posts
     var blogContainer = $(".blog-container");
     //var postCategorySelect = $("#category");
-    // Click events for the edit and delete buttons
-    $(document).on("click", "button.delete", handlePostDelete);
-    $(document).on("click", "button.edit", handlePostEdit);
-    //postCategorySelect.on("change", handleCategoryChange);
     var posts;
-
-    // Getting the initial list of posts
-    console.log("Going to Get Posts");
-    getPosts();
-    console.log("After Getting Posts");
-
     // This function grabs posts from the database and updates the view
-    function getPosts(category) {
+    function getAllPosts(category) {
         console.log("In Get Posts");
         var categoryString = category || "";
         if (categoryString) {
         categoryString = "/category/" + categoryString;
         }
-        $.get("/api/posts" + categoryString, function(data) {
+        $.get("/api/posts", function(data) {
         console.log("Posts", data);
         console.log("Category=" + categoryString);
         posts = data;
@@ -163,23 +87,7 @@ $(document).ready(function() {
         else {
             console.log("I am going to Initialize the Row");
             initializeRows();
-            if (editPost === "Yes"){
-
-                showhideblogwindow()
-                editPost = "No";
-            }
         }
-        });
-    }
-
-    // This function does an API call to delete posts
-    function deletePost(id) {
-        $.ajax({
-        method: "DELETE",
-        url: "/api/posts/" + id
-        })
-        .then(function() {
-            getPosts(postCategorySelect.val());
         });
     }
 
@@ -203,12 +111,6 @@ $(document).ready(function() {
         newPostCard.addClass("card");
         var newPostCardHeading = $("<div>");
         newPostCardHeading.addClass("card-header");
-        var deleteBtn = $("<button>");
-        deleteBtn.text("x");
-        deleteBtn.addClass("delete btn btn-danger");
-        var editBtn = $("<button>");
-        editBtn.text("Edit");
-        editBtn.addClass("edit btn btn-default");
         var newPostTitle = $("<h4>");
         var newPostDate = $("<small>");
         var newPostCategory = $("<h5>");
@@ -229,44 +131,17 @@ $(document).ready(function() {
         formattedDate = moment(formattedDate).format("lll");
         newPostDate.text(formattedDate);
         newPostTitle.append(newPostDate);
-        newPostCardHeading.append(deleteBtn);
-        newPostCardHeading.append(editBtn);
         newPostCardHeading.append(newPostTitle);
         newPostCardHeading.append(newPostCategory);
         newPostCardBody.append(newPostDate);
         newPostCardBody.append(newPostBody);
         newPostCard.append(newPostCardHeading);
         newPostCard.append(newPostCardBody);
+        newPostCard.append("<br>");
         newPostCard.data("post", post);
         return newPostCard;
     }
 
-    // This function figures out which post we want to delete and then calls
-    // deletePost
-    function handlePostDelete() {
-        var currentPost = $(this)
-        .parent()
-        .parent()
-        .data("post");
-        deletePost(currentPost.id);
-    }
-
-    // This function figures out which post we want to edit and takes it to the
-    // Appropriate url
-    function handlePostEdit() {
-        newPostYes = "Yes";
-        //firstTime = "Yes";
-        editPost = "Yes";
-        $("#newblogbtn").text("-Cancel Edit");
-        var currentPost = $(this)
-        .parent()
-        .parent()
-        .data("post");
-        console.log("Post Flags=" + newPostYes + "=" + editPost);
-
-        window.location.href = "/members?post_id=" + currentPost.id;
-        showhideblogwindow();
-    }
 
     // This function displays a message when there are no posts
     function displayEmpty() {
@@ -275,12 +150,6 @@ $(document).ready(function() {
         messageH2.css({ "text-align": "center", "margin-top": "50px" });
         messageH2.html("No posts yet for this category.Please create a new post.");
         blogContainer.append(messageH2);
-    }
-
-    // This function handles reloading new posts when the category changes
-    function handleCategoryChange() {
-        var newPostCategory = $(this).val();
-        getPosts(newPostCategory);
     }
 
 
