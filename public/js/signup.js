@@ -7,13 +7,13 @@ $(document).ready(function()
   //var usernameInput ="defaultName";
   var emailInput = $("input#email");
   var passwordInput = $("input#password");
-  //console.log("User Name=" + usernameInput);
-  //console.log("Email=" + emailInput);
-  //console.log("passwordInput=" + passwordInput);
+  console.log("User Name=" + usernameInput);
+  console.log("Email=" + emailInput);
+  console.log("passwordInput=" + passwordInput);
   // When the signup button is clicked, validate the email and password are not blank
   signUpForm.on("submit", function(event) {
     event.preventDefault();
-    // Add Timestamp - future enhancement
+    //forgot need to add true for logged : logged: true
     var userData = {
       email: emailInput.val(),
       password: passwordInput.val(),
@@ -29,6 +29,7 @@ $(document).ready(function()
     emailInput.val("");
     passwordInput.val("");
     usernameInput.val("");
+
   });
 
   // Does a post to the signup route. If succesful, we are redirected to the members page
@@ -40,6 +41,7 @@ $(document).ready(function()
       userName:userName
     }).then(function(data) {
       window.location.replace(data);
+      // If there's an error, handle it by throwing up a boostrap alert
     }).catch(handleLoginErr);
   }
 
@@ -47,4 +49,5 @@ $(document).ready(function()
     $("#alert .msg").text(err.responseJSON);
     $("#alert").fadeIn(500);
   }
+
 });

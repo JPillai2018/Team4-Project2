@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <!-- metadata -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Project2: GA Tech Bootcamp" />
+    <meta name="author" content="Danny Sprouse, Angela Norris, Jay Pillai, Juhi Patel" />
+
+    <!-- website title -->
+    <title>Let's Talk Pets! members</title>
+
+    <!-- script for jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- link to css reset -->
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/reset.css" />
+    <!-- Moment.js Reference -->
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+    <!-- link to bootstrap cdn -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+    <!-- link to css stylesheet -->
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/style.css" />
+    <!-- link to favicon image -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon" />
+
+
+    <style>
+        .carousel-inner img {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<!-- PAGE CONTENT -->
+
+<body>
+
+
+    <div class="container-fluid container-wrap">
+        <div class="container-fluid header">
+            <div class="row">
+                <div class="col">
+                    <img id="logo" src="assets/images/logo.png" />
+                </div>
+                <!-- <div class="col" id="register">
+                    <h6>Not a Member?<br >Would you like to post about your pet and share an image?</h6>
+                    <h5>
+                        <a href="/signup">Signup HERE!</a>
+                    </h5>
+                    <br />
+                    <h6>Already a Member?<br >Sign in and tell us about your pet!</h6>
+                    <h5>
+                        <a href="/login">LOGIN HERE!</a>
+                    </h5>
+                    <br />
+                    </div> -->
+                        <div class="col bfad">
+                            <a href="https://bestfriends.org/about-best-friends/our-mission/save-them-all" target="_blank">
+                                <img src="assets/images/bfad.png" />
+                            </a>
+                            <p>Best Friends is nationwide animal rescue and advocacy organization, with spay neuter, TNR (trap neuter
+                                return), pet adoption and no-kill programs.</p>
+                        </div>
+                        <div>
+                            <p>Welcome Member!!!</p>
+                        </div>
+                    </div>
+        </div>
+        
+        <div class="container-fluid">
+                    <div class="row navigation">
+                        <ul class="nav justify-content-center">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Dogs</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Cats</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Other Pets</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link disabled" href="/signup">Sign Up</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link disabled" href="/login">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/logout">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+        </div>
+        <br />    
+        <div class="row">
+            <div class="col-md-7">
+                    <div class="card text-center">
+                        <div class="blogs-section">
+                            <div>
+                                <h5 class="blog-title">My Blogs</h5>
+                            </div>
+                        </div>
+                        <div class="button-group">
+                            <table class="optiontable">
+                            <tr>
+                                <div class="col-md-8 offset-md-2 ">
+                                    <div>
+                                        <button id="newblogbtn" type="button"  class="btn">+Add New Post</button>
+                                    </div>
+                                </div>
+                            </tr>
+                            <br>
+                            <tr>
+                                <div class="col-md-8 offset-md-2 blog-content">
+                                    <form id="blog">
+                                        <div class="form-group">
+                                            <label for="title">Title:</label>
+                                            <input type="text" class="form-control" id="title">
+                                            <br/>
+                                            <label for="body">Your Thoughts</label>
+                                            <textarea class="form-control" rows="7" id="body"></textarea>
+                                            <br />
+                                            <button type="submit" class="btn btn-success submit btn-sm" id= "newblogsubmitbtn">Submit</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </tr>
+                            </table>                                                                                                                   
+                        </div>
+                    </div>
+            </div>
+            <!-- Commenting out the below section-->
+            <!-- <div class="col dogside text-center">
+                        <button type="button" class="btn btn-success joinNow">Register!</button>
+                        <br />
+                        <br />
+                        <div class="card mx-auto" style="width: 24rem;">
+                            <img class="card-img-top" src="assets/images/dog1.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-text">Dog ipsum dolor sit amet, tempor so accusantium minim yet quasi. Id eius consequatur laboriosam
+                                    minima proident, and quae. Officia explicabo omnis yet numquam tempora so quae. Cillum. Nesciunt
+                                    et cillum exercitationem or accusantium. Accusantium magni consectetur yet proident for laboris
+                                    consequuntur so modi. Sed excepteur yet iste non or sunt and si.</p>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="card mx-auto" style="width: 24rem;">
+                            <img class="card-img-top" src="assets/images/cat1.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-text">Cat ipsum dolor sit amet, tempor so accusantium minim yet quasi. Id eius consequatur laboriosam
+                                    minima proident, and quae. Officia explicabo omnis yet numquam tempora so quae. Cillum. Nesciunt
+                                    et cillum exercitationem or accusantium. Accusantium magni consectetur yet proident for laboris
+                                    consequuntur so modi. Sed excepteur yet iste non or sunt and si.</p>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="card mx-auto" style="width: 24rem;">
+                            <img class="card-img-top" src="assets/images/rabbit1.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-text">Rabbit ipsum dolor sit amet, tempor so accusantium minim yet quasi. Id eius consequatur laboriosam
+                                    minima proident, and quae. Officia explicabo omnis yet numquam tempora so quae. Cillum. Nesciunt
+                                    et cillum exercitationem or accusantium. Accusantium magni consectetur yet proident for laboris
+                                    consequuntur so modi. Sed excepteur yet iste non or sunt and si. </p>
+                            </div>
+                        </div>
+                    </div> -->
+            <!-- Temporarily Commenting the below section-->
+            <!-- <div class="col dogside text-center">
+                        <button type="button" class="btn btn-success joinNow">Register!</button>
+                        <br />
+                        <br />
+                        <div class="card mx-auto" style="width: 24rem;">
+                            <img class="card-img-top" src="assets/images/dog1.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-text">Dog ipsum dolor sit amet, tempor so accusantium minim yet quasi. Id eius consequatur laboriosam
+                                    minima proident, and quae. Officia explicabo omnis yet numquam tempora so quae. Cillum. Nesciunt
+                                    et cillum exercitationem or accusantium. Accusantium magni consectetur yet proident for laboris
+                                    consequuntur so modi. Sed excepteur yet iste non or sunt and si.</p>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="card mx-auto" style="width: 24rem;">
+                            <img class="card-img-top" src="assets/images/cat1.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-text">Cat ipsum dolor sit amet, tempor so accusantium minim yet quasi. Id eius consequatur laboriosam
+                                    minima proident, and quae. Officia explicabo omnis yet numquam tempora so quae. Cillum. Nesciunt
+                                    et cillum exercitationem or accusantium. Accusantium magni consectetur yet proident for laboris
+                                    consequuntur so modi. Sed excepteur yet iste non or sunt and si.</p>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="card mx-auto" style="width: 24rem;">
+                            <img class="card-img-top" src="assets/images/rabbit1.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-text">Rabbit ipsum dolor sit amet, tempor so accusantium minim yet quasi. Id eius consequatur laboriosam
+                                    minima proident, and quae. Officia explicabo omnis yet numquam tempora so quae. Cillum. Nesciunt
+                                    et cillum exercitationem or accusantium. Accusantium magni consectetur yet proident for laboris
+                                    consequuntur so modi. Sed excepteur yet iste non or sunt and si. </p>
+                            </div>
+                        </div>
+                    </div> -->
+        </div>
+        <div class="row">
+            <div class="col-md-7">
+                        <div class="card text-center">
+                            <div class="blogs-section">
+                                <div>
+                                    <h5 class="blog-title">Recent Posts</h5>
+                                </div>
+                            </div>
+                            <div class="button-group">
+                                <table class="optiontable">
+                                <br>
+                                <tr>
+                                    <div class="col-md-12 blog-container">
+                                    </div>
+                                </tr>
+                                </table>                                                                                                                   
+                            </div>
+                        </div>
+            </div>
+            <!-- Commenting out the below section-->
+            <!-- <div class="col dogside text-center">
+                            <button type="button" class="btn btn-success joinNow">Register!</button>
+                            <br />
+                            <br />
+                            <div class="card mx-auto" style="width: 24rem;">
+                                <img class="card-img-top" src="assets/images/dog1.jpg" alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Dog ipsum dolor sit amet, tempor so accusantium minim yet quasi. Id eius consequatur laboriosam
+                                        minima proident, and quae. Officia explicabo omnis yet numquam tempora so quae. Cillum. Nesciunt
+                                        et cillum exercitationem or accusantium. Accusantium magni consectetur yet proident for laboris
+                                        consequuntur so modi. Sed excepteur yet iste non or sunt and si.</p>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="card mx-auto" style="width: 24rem;">
+                                <img class="card-img-top" src="assets/images/cat1.jpg" alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Cat ipsum dolor sit amet, tempor so accusantium minim yet quasi. Id eius consequatur laboriosam
+                                        minima proident, and quae. Officia explicabo omnis yet numquam tempora so quae. Cillum. Nesciunt
+                                        et cillum exercitationem or accusantium. Accusantium magni consectetur yet proident for laboris
+                                        consequuntur so modi. Sed excepteur yet iste non or sunt and si.</p>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="card mx-auto" style="width: 24rem;">
+                                <img class="card-img-top" src="assets/images/rabbit1.jpg" alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Rabbit ipsum dolor sit amet, tempor so accusantium minim yet quasi. Id eius consequatur laboriosam
+                                        minima proident, and quae. Officia explicabo omnis yet numquam tempora so quae. Cillum. Nesciunt
+                                        et cillum exercitationem or accusantium. Accusantium magni consectetur yet proident for laboris
+                                        consequuntur so modi. Sed excepteur yet iste non or sunt and si. </p>
+                                </div>
+                            </div>
+                        </div> -->
+            <!-- Temporarily Commenting the below section-->
+            <!-- <div class="col dogside text-center">
+                            <button type="button" class="btn btn-success joinNow">Register!</button>
+                            <br />
+                            <br />
+                            <div class="card mx-auto" style="width: 24rem;">
+                                <img class="card-img-top" src="assets/images/dog1.jpg" alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Dog ipsum dolor sit amet, tempor so accusantium minim yet quasi. Id eius consequatur laboriosam
+                                        minima proident, and quae. Officia explicabo omnis yet numquam tempora so quae. Cillum. Nesciunt
+                                        et cillum exercitationem or accusantium. Accusantium magni consectetur yet proident for laboris
+                                        consequuntur so modi. Sed excepteur yet iste non or sunt and si.</p>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="card mx-auto" style="width: 24rem;">
+                                <img class="card-img-top" src="assets/images/cat1.jpg" alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Cat ipsum dolor sit amet, tempor so accusantium minim yet quasi. Id eius consequatur laboriosam
+                                        minima proident, and quae. Officia explicabo omnis yet numquam tempora so quae. Cillum. Nesciunt
+                                        et cillum exercitationem or accusantium. Accusantium magni consectetur yet proident for laboris
+                                        consequuntur so modi. Sed excepteur yet iste non or sunt and si.</p>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="card mx-auto" style="width: 24rem;">
+                                <img class="card-img-top" src="assets/images/rabbit1.jpg" alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Rabbit ipsum dolor sit amet, tempor so accusantium minim yet quasi. Id eius consequatur laboriosam
+                                        minima proident, and quae. Officia explicabo omnis yet numquam tempora so quae. Cillum. Nesciunt
+                                        et cillum exercitationem or accusantium. Accusantium magni consectetur yet proident for laboris
+                                        consequuntur so modi. Sed excepteur yet iste non or sunt and si. </p>
+                                </div>
+                            </div>
+                        </div> -->
+        </div>
+        <!-- Recent Posts -->
+    </div>
+    <!-- close wrapper -->
+
+    <!-- footer info -->
+    <footer class="container-fluid">
+
+        <!-- copyright -->
+        <p id="copyright">Copyright &#169; 2018 &nbsp; &nbsp;
+        </p>
+    </footer>
+
+
+    <!-- script for javascript -->
+    <!-- <script src="assets/javascript/pets.js"></script> -->
+    <script src="../js/members.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            // Activate Carousel with a specified interval
+            $("#myCarousel").carousel({interval: 4000});
+                
+            // Enable Carousel Indicators
+            $(".item1").click(function(){
+                $("#myCarousel").carousel(0);
+            });
+            $(".item2").click(function(){
+                $("#myCarousel").carousel(1);
+            });
+            $(".item3").click(function(){
+                $("#myCarousel").carousel(2);
+            });
+            $(".item4").click(function(){
+                $("#myCarousel").carousel(1);
+            });
+            $(".item5").click(function(){
+                $("#myCarousel").carousel(2);
+            });
+            
+            // Enable Carousel Controls
+            $(".carousel-control-prev").click(function(){
+                $("#myCarousel").carousel("prev");
+            });
+            $(".carousel-control-next").click(function(){
+                $("#myCarousel").carousel("next");
+            });
+        });
+    </script>
+
+</body>
+
+</html>

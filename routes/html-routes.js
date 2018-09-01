@@ -21,6 +21,7 @@ module.exports = function(app)
 
   //login route
   app.get("/login", function(req, res) {
+    // res.sendFile(path.join(__dirname, "../public/html/login.html"));
     res.sendFile(path.join(__dirname, "../public/html/login.html"));
   });
 
@@ -38,7 +39,7 @@ module.exports = function(app)
   // If a user who is not logged in tries to access this route they will be redirected to the signup page
   app.get("/members", isAuthenticated, function(req, res) {
     console.log("Now I Am Authenticated");
-    res.sendFile(path.join(__dirname, "../public/html/index.html"));
+    res.sendFile(path.join(__dirname, "../public/html/members.html"));
   });
   app.get("/allvisitors", function(req, res) {
     console.log("I am just a Visitor");
@@ -52,18 +53,18 @@ module.exports = function(app)
   //*******************************************************************************************************//
   // Following are the routes for Blogging (CRUD)
   //update route for loading existing blogs
-  // app.get("/blog", function(req, res) {
-  //   res.sendFile(path.join(__dirname, "../public/html/blog.html"))
-  // })
+  app.get("/blog", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/html/members.html"))
+  })
 
   //New blogs route
-  //  app.get("/api/new", function (req, res) {
-  //   res.sendFile(path.join(__dirname, "../public/index.html"));
-  // });
+   app.get("/api/new", function (req, res) {
+    res.sendFile(path.join(__dirname, "../public/html/members.html"));
+  });
 
-  // app.get("/api/newBlog", function (req, res) {
-  //   res.sendFile(path.join(__dirname, "../public/index.html"));
-  // });
+  app.get("/api/newBlog", function (req, res) {
+    res.sendFile(path.join(__dirname, "../public/html/members.html"));
+  });
 
 
 

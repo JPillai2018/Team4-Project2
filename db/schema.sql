@@ -15,7 +15,7 @@ CREATE TABLE users
 	PRIMARY KEY (id) 
 );
 
-CREATE TABLE blogs
+CREATE TABLE doggyblog
 (
 	emaildog int NOT NULL AUTO_INCREMENT,
 	dog_name varchar(50) NOT NULL,
