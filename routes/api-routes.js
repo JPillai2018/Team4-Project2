@@ -103,6 +103,18 @@ app.get("/api/posts/category/:category", function(req, res) {
     });
 });
 
+// Get route for returning posts of a specific category- use email instead of category
+app.get("/api/posts/email/:email", function(req, res) {
+  db.Post.findAll({
+    where: {
+      email: req.params.email
+    }
+  })
+    .then(function(dbPost) {
+      res.json(dbPost);
+    });
+});
+
 // Get route for retrieving a single post
 app.get("/api/posts/:id", function(req, res) {
   db.Post.findOne({
@@ -119,6 +131,7 @@ app.get("/api/posts/:id", function(req, res) {
 app.post("/api/posts", function(req, res) {
   console.log(req.body);
   db.Post.create({
+    email: req.body.email,
     title: req.body.title,
     body: req.body.body,
     category: req.body.category

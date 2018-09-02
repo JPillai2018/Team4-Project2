@@ -102,18 +102,19 @@ $(document).ready(function() {
         postsToAdd.push(createNewRow(posts[i]));
         }
         blogContainer.append(postsToAdd);
+        blogContainer.append("<div><br></br></div>");
         console.log("I am appending...");
     }
 
     // This function constructs a post's HTML
     function createNewRow(post) {
         var newPostCard = $("<div>");
-        newPostCard.addClass("card");
+        newPostCard.addClass("card mx-auto");
         var newPostCardHeading = $("<div>");
         newPostCardHeading.addClass("card-header");
-        var newPostTitle = $("<h4>");
+        var newPostTitle = $("<h5>");
         var newPostDate = $("<small>");
-        var newPostCategory = $("<h5>");
+        var newPostCategory = $("<h6>");
         //newPostCategory.text(post.category);
         // newPostCategory.css({
         // float: "right",
@@ -129,6 +130,7 @@ $(document).ready(function() {
         var formattedDate = new Date(post.createdAt);
         //formattedDate = moment(formattedDate).format("MMMM Do YYYY, h:mm:ss a");
         formattedDate = moment(formattedDate).format("lll");
+        formattedDate = formattedDate + ".       Posted by " + post.email;
         newPostDate.text(formattedDate);
         newPostTitle.append(newPostDate);
         newPostCardHeading.append(newPostTitle);

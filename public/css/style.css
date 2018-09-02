@@ -171,3 +171,9 @@ a h6{
 .form-group label{
   font-weight: 500;
 }
+
+.card-body{
+  padding: 2px;
+  border-style: inset;
+  border-radius: 3px;
+}

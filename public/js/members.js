@@ -124,8 +124,8 @@ $(document).ready(function() {
                 $("#newblogbtn").text("+Add New Post");
                 $(".blog-content").css("display", "none");
                 newPostYes = "No";
-                $("#title").text("");
-                $("#blog").text("");
+                $("#title").val("");
+                $("#body").val("");
             }
         }
         console.log("New Post Button Value = " + newBlogStatus);
@@ -140,22 +140,22 @@ $(document).ready(function() {
     $(document).on("click", "button.edit", handlePostEdit);
     //postCategorySelect.on("change", handleCategoryChange);
     var posts;
-
+    var email = "jpillai1@gmail.com";
     // Getting the initial list of posts
     console.log("Going to Get Posts");
-    getPosts();
+    getPosts(email);
     console.log("After Getting Posts");
 
     // This function grabs posts from the database and updates the view
-    function getPosts(category) {
+    function getPosts(email) {
         console.log("In Get Posts");
-        var categoryString = category || "";
-        if (categoryString) {
-        categoryString = "/category/" + categoryString;
+        var emailString = email || "";
+        if (emailString) {
+        emailString = "/" + emailString;
         }
-        $.get("/api/posts" + categoryString, function(data) {
+        $.get("/api/posts/email" + emailString, function(data) {
         console.log("Posts", data);
-        console.log("Category=" + categoryString);
+        console.log("Email=" + emailString);
         posts = data;
         if (!posts || !posts.length) {
             displayEmpty();

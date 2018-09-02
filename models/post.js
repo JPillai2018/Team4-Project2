@@ -12,21 +12,22 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: true,
       validate: {
-      isEmail: true
+      isEmail: true,
+      len: [1, 50]
       }
     },
     title: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [1]
+        len: [1, 50]
       }
     },
     body: {
       type: DataTypes.TEXT,
       allowNull: false,
       validate: {
-        len: [1]
+        len: [1, 250]
       }
     },
     category: {

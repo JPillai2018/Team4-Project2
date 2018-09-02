@@ -19,7 +19,8 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       unique: true,
       validate: {
-        isEmail: true
+        isEmail: true,
+        length: [1, 50]
       }
     },
 
@@ -36,8 +37,6 @@ module.exports = function(sequelize, DataTypes) {
 
   }, {
     timestamps: false
-
-
   });
 
   //   User.associate = function(models) {
