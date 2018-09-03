@@ -1,9 +1,7 @@
 // Javascript file to handle Blog related logic. 
 // Main operations include Add blog, Update blog, Delete blog
 // We have section in this file
-
 // Members Page- Create new Blog
-
 $(document).ready(function() {
     // Add Blog Button click control logic
     var newPostYes = "No";
@@ -12,10 +10,7 @@ $(document).ready(function() {
     var newBlogStatus = "";
 
     // Getting the initial list of posts
-    console.log("Going to Get Posts");
     getAllPosts();
-    console.log("After Getting Posts");
-
     // Gets an optional query string from our url (i.e. ?post_id=23)
     var url = window.location.search;
     var postId;
@@ -60,11 +55,7 @@ $(document).ready(function() {
       });
     }
   
-
-
-
     // General functions
- 
     // Members Page- Blog Management
     // blogContainer holds all of our posts
     var blogContainer = $(".blog-container");
@@ -72,30 +63,26 @@ $(document).ready(function() {
     var posts;
     // This function grabs posts from the database and updates the view
     function getAllPosts(category) {
-        console.log("In Get Posts");
         var categoryString = category || "";
         if (categoryString) {
         categoryString = "/category/" + categoryString;
         }
         $.get("/api/posts", function(data) {
-        console.log("Posts", data);
-        console.log("Category=" + categoryString);
+        //console.log("Posts", data);
+        //console.log("Category=" + categoryString);
         posts = data;
         if (!posts || !posts.length) {
             displayEmpty();
         }
         else {
-            console.log("I am going to Initialize the Row");
             initializeRows();
         }
         });
     }
 
-
     // InitializeRows handles appending all of our constructed post HTML inside
     // blogContainer
     function initializeRows() {
-        console.log("I am initializing...");
         blogContainer.empty();
         var postsToAdd = [];
         for (var i = 0; i < posts.length; i++) {
@@ -103,7 +90,6 @@ $(document).ready(function() {
         }
         blogContainer.append(postsToAdd);
         blogContainer.append("<div><br></br></div>");
-        console.log("I am appending...");
     }
 
     // This function constructs a post's HTML
@@ -143,7 +129,6 @@ $(document).ready(function() {
         newPostCard.data("post", post);
         return newPostCard;
     }
-
 
     // This function displays a message when there are no posts
     function displayEmpty() {

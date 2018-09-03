@@ -4,10 +4,8 @@
 // Dependencies
 // =============================================================
 var path = require("path");
-
 // Requiring our custom middleware for checking if a user is logged in
 var isAuthenticated = require("../config/middleware/isAuthenticated");
-
 // Routes
 // =============================================================
 module.exports = function(app)
@@ -31,23 +29,19 @@ module.exports = function(app)
   })
 
   app.get("/loginforsignup", function(req, res) {
-    console.log("I am logging in after signup");
     res.sendFile(path.join(__dirname, "../public/html/login.html"));
   });
 
   // Here we've add our isAuthenticated middleware to this route.
   // If a user who is not logged in tries to access this route they will be redirected to the signup page
   app.get("/members", isAuthenticated, function(req, res) {
-    console.log("Now I Am Authenticated");
     res.sendFile(path.join(__dirname, "../public/html/members.html"));
   });
   app.get("/allvisitors", function(req, res) {
-    console.log("I am just a Visitor");
     res.sendFile(path.join(__dirname, "../public/index.html"));
   });
 
   app.get("/memberslogin", function(req, res) {
-    console.log("I am just a Member");
     res.sendFile(path.join(__dirname, "../public/index.html"));
   });
   //*******************************************************************************************************//
@@ -58,15 +52,12 @@ module.exports = function(app)
   })
 
   //New blogs route
-   app.get("/api/new", function (req, res) {
-    res.sendFile(path.join(__dirname, "../public/html/members.html"));
-  });
+  //  app.get("/api/new", function (req, res) {
+  //   res.sendFile(path.join(__dirname, "../public/html/members.html"));
+  // });
 
-  app.get("/api/newBlog", function (req, res) {
-    res.sendFile(path.join(__dirname, "../public/html/members.html"));
-  });
-
-
-
+  // app.get("/api/newBlog", function (req, res) {
+  //   res.sendFile(path.join(__dirname, "../public/html/members.html"));
+  // });
 
 };

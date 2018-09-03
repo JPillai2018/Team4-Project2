@@ -45,7 +45,6 @@ app.use(passport.session());
 // =============================================================
 require("./routes/html-routes.js")(app);
 require("./routes/api-routes.js")(app);
-//require("./routes/blog-api-routes.js")(app);
 
 //newest update
 // Starts the server to begin listening
@@ -55,7 +54,6 @@ db.sequelize.sync({
 }).then(function () {
   server.listen(PORT, function () {
     console.log("App listening on PORT " + PORT);
-
   });
 });
 
