@@ -1,9 +1,6 @@
 // Javascript file to handle Blog related logic. 
 // Main operations include Add blog, Update blog, Delete blog
-// We have section in this file
-
 // Members Page- Create new Blog
-
 $(document).ready(function() {
     // Add Blog Button click control logic
     var newPostYes = "No";
@@ -13,15 +10,12 @@ $(document).ready(function() {
     showhideblogwindow();
     $("#newblogbtn").on("click", showhideblogwindow);
 
-
     // Gets an optional query string from our url (i.e. ?post_id=23)
     var url = window.location.search;
     var postId;
     // Sets a flag for whether or not we're updating a post to be false initially
     var updating = false;
-  
-    // If we have this section in our url, we pull out the post id from the url
-    // In localhost:8080/cms?post_id=1, postId is 1
+
     if (url.indexOf("?post_id=") !== -1) {
       postId = url.split("=")[1];
       getPostData(postId);
@@ -31,15 +25,14 @@ $(document).ready(function() {
     var bodyInput = $("#body");
     var titleInput = $("#title");
     var blogForm = $("#blog");
-     // Get email from the session cookies. For now i am hardcoding
-     var blogemail = "jpillai1@gmail.com";
-    //var postCategorySelect = $("#category");
-    // Giving the postCategorySelect a default value
-    //postCategorySelect.val("Personal");
+
     // Adding an event listener for when the form is submitted
     $(blogForm).on("submit", function handleFormSubmit(event) {
       event.preventDefault();
-      // Wont submit the post if we are missing a body or a title
+    // Get email from the session cookies.  
+      var blogEmail = localStorage.getItem("PetsTalkUser");
+      blogemail = blogEmail;
+      // Checking error for Posts
       if (!titleInput.val().trim() || !bodyInput.val().trim()) {
         return;
       }
@@ -81,7 +74,6 @@ $(document).ready(function() {
           // If we have a post with this id, set a flag for us to know to update the post
           // when we hit submit
           updating = true;
-          console.log("BlogStatus11" + newBlogStatus);
           showhideblogwindow();
         }
       });
@@ -99,14 +91,11 @@ $(document).ready(function() {
     });
     }
 
-
-
     // General functions
     //Function to start the quizz game when Start button is clicked
     function showhideblogwindow(){
 
         newBlogStatus = $("#newblogbtn").text();
-        console.log("BlogStatus" + newBlogStatus);
         if (firstTime === "Yes"){
             firstTime = "No";
             $("#newblogbtn").text("+Add New Post");
@@ -134,37 +123,29 @@ $(document).ready(function() {
     // Members Page- Blog Management
     // blogContainer holds all of our posts
     var blogContainer = $(".blog-container");
-    //var postCategorySelect = $("#category");
     // Click events for the edit and delete buttons
     $(document).on("click", "button.delete", handlePostDelete);
     $(document).on("click", "button.edit", handlePostEdit);
-    //postCategorySelect.on("change", handleCategoryChange);
     var posts;
-    var email = "jpillai1@gmail.com";
+    var blogEmail = localStorage.getItem("PetsTalkUser");
+
     // Getting the initial list of posts
-    console.log("Going to Get Posts");
-    getPosts(email);
-    console.log("After Getting Posts");
+    getPosts(blogEmail);
 
     // This function grabs posts from the database and updates the view
     function getPosts(email) {
-        console.log("In Get Posts");
         var emailString = email || "";
         if (emailString) {
         emailString = "/" + emailString;
         }
         $.get("/api/posts/email" + emailString, function(data) {
-        console.log("Posts", data);
-        console.log("Email=" + emailString);
         posts = data;
         if (!posts || !posts.length) {
             displayEmpty();
         }
         else {
-            console.log("I am going to Initialize the Row");
             initializeRows();
             if (editPost === "Yes"){
-
                 showhideblogwindow()
                 editPost = "No";
             }
@@ -183,18 +164,15 @@ $(document).ready(function() {
         });
     }
 
-
     // InitializeRows handles appending all of our constructed post HTML inside
     // blogContainer
     function initializeRows() {
-        console.log("I am initializing...");
         blogContainer.empty();
         var postsToAdd = [];
         for (var i = 0; i < posts.length; i++) {
         postsToAdd.push(createNewRow(posts[i]));
         }
         blogContainer.append(postsToAdd);
-        console.log("I am appending...");
     }
 
     // This function constructs a post's HTML
@@ -262,8 +240,6 @@ $(document).ready(function() {
         .parent()
         .parent()
         .data("post");
-        console.log("Post Flags=" + newPostYes + "=" + editPost);
-
         window.location.href = "/members?post_id=" + currentPost.id;
         showhideblogwindow();
     }
@@ -282,7 +258,5 @@ $(document).ready(function() {
         var newPostCategory = $(this).val();
         getPosts(newPostCategory);
     }
-
-
 
 });

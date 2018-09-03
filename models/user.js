@@ -9,8 +9,7 @@ module.exports = function(sequelize, DataTypes) {
     // The User Name cannot be null.
     userName:{
       type: DataTypes.STRING, 
-      allowNull: false,
-      unique: true
+      allowNull: false
     },
 
     // The email cannot be null, and must be a proper email before creation
@@ -19,8 +18,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       unique: true,
       validate: {
-        isEmail: true,
-        length: [1, 50]
+        isEmail: true
       }
     },
 
@@ -39,7 +37,7 @@ module.exports = function(sequelize, DataTypes) {
     timestamps: false
   });
 
-  //   User.associate = function(models) {
+  //  User.associate = function(models) {
   //  User.hasMany(models.Blog, {
   //     onDelete: "cascade"
   //  });

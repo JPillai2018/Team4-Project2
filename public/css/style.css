@@ -159,7 +159,7 @@ a h6{
 
 .card-header{
   height: 40px;
-  background-color: #7ac7f7;
+  background-color: #a1d7f8;
   border-bottom-color: #0b08ee;
   border-bottom-style: outset;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -176,4 +176,16 @@ a h6{
   padding: 2px;
   border-style: inset;
   border-radius: 3px;
+}
+
+.loginlogoutImg{
+  width: 50%;
+  height: 50%;
+  margin-left: auto;
+  margin-right: auto;  
+}
+
+.button-group-all{
+  overflow: auto;
+  max-height: 200px;
 }

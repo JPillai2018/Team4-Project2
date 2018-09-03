@@ -1,6 +1,6 @@
 $(document).ready(function() {
  // Getting references to our form and inputs for user login password and email
- console.log("I am here 0");
+  console.log("I am here 0");
   var loginForm = $("form.login");
   var emailInput = $("input#email");
   var passwordInput = $("input#password");
@@ -17,6 +17,8 @@ $(document).ready(function() {
       email: emailInput.val(),
       password: passwordInput.val()
     };
+    localStorage.removeItem("PetsTalkUser");
+    localStorage.setItem("PetsTalkUser", email);
     //if email or password not submitted jump out of the function
     console.log("I am here 2");
     if (!userData.email || !userData.password) {
@@ -41,14 +43,11 @@ $(document).ready(function() {
     console.log("I am here 5");
     $.post("/api/login", 
     {
-
       email: email,
       password: password
-
     })
     .then(function(data) {
       window.location.replace(data);
-
     })
     
   }
@@ -89,10 +88,10 @@ $(document).ready(function() {
   {
     console.log("Saving email in to local storage");
     //Clear current local storage before adding fresh entry
-    localStorage.removeItem("PetsTalk");
+    localStorage.removeItem("PetsTalkUser");
     //get the user email, store in local storage
     var email = $("#email").val().trim();
-    localStorage.setItem("PetsTalk", email);
+    localStorage.setItem("PetsTalkUser", email);
     //clear the email value
     $('#email').val(''); 
   }

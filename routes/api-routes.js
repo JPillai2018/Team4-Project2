@@ -7,17 +7,66 @@ module.exports = function(app) {
   // If the user has valid login credentials, send them to the members page.
   // Otherwise the user will be sent an error
   //app.post("/api/login", passport.authenticate("local", {successRedirect: "/members" , failureRedirect: "/login"}));
+  //** */
   app.post("/api/login", passport.authenticate("local"), function(req, res) {
   
     res.json("/members");
   });
+  //
+//   app.post('/api/login',
+//   passport.authenticate('local', { successRedirect: '/members',
+//                                    failureRedirect: '/login',
+//                                    failureFlash: "Password Violation!!!" })
+// );
+  // app.post("/api/login", passport.authenticate('local-login', {
+  //   successRedirect: "/members",
+  //   failureRedirect: "/login",
+  //   failureFlash: true
+  // }),
+  //   function(req, res){
+  // }
+  // );
 
+  //Route to login page if user failed to login. I created this to allow flash messages and not interfere with regular login route
+  app.get("/loginfailed", function(req, res){
+    if (!req.user){
+      alert("success", "Username or password is incorrect.");
+      res.redirect("/login");
+    }
+  });
+
+  //
+  // app.post("/api/login", passport.authenticate("local", 
+  // { successRedirect: "/members", 
+  //   failureRedirect: "/login", 
+  //   failureMessage: "Invalid username or password" }));
+  //
+  // Passport Authentication
+  // app.post("/api/login", function(req, res, next) {
+  //   passport.authenticate('local', function(err, user, info) {
+  //     if (err) {
+  //       return next(err); // will generate a 500 error
+  //     }
+  //     // Generate a JSON response reflecting authentication status
+  //     if (! user) {
+  //       return res.send(401,{ success : false, message : 'authentication failed' });
+  //     }
+  //     req.login(user, function(err){
+  //       if(err){
+  //         return next(err);
+  //       }
+  //       return res.send({ success : true, message : 'authentication succeeded' });        
+  //     });
+  //   })(req, res, next);
+  // });
+
+//
   // Route for signing up a user/Creating a new User credential. 
   // The user's password is hashed and stored securely.
   // If the user is created successfully, proceed to log the user in page for logging in.
   // If the use is not able to be signed up, then send an error back.
   app.post("/api/signup", function(req, res) {
-    console.log ("User Data = " + req.body.userName);
+    console.log ("User Data = " + req.body.userName + "=" + req.body.email + "=" + req.body.password);
     db.User.create({
       userName: req.body.userName,
       email: req.body.email,
@@ -26,11 +75,11 @@ module.exports = function(app) {
     }).then(function() {
       //res.json("/memberslogin");
       //res.redirect(307, "/login");
-      //res.redirect(307, "/api/login");
+      res.redirect(307, "/api/login");
       //res.redirect(307, "/loginforsignup");
-      res.redirect("/loginforsignup");
+      //res.redirect("/members");
     }).catch(function(err) {
-      //window.alert("Incorrect User Id or Password. Try Again");
+      window.alert("Incorrect User Id or Password. Try Again");
       res.json(err);
     });
   });
@@ -38,7 +87,6 @@ module.exports = function(app) {
   // Route for logging user out
   app.get("/logout", function(req, res)
   {
-    console.log("I am here to logout...");
     req.logout();
     res.redirect("/allvisitors");
   });
@@ -64,7 +112,6 @@ app.put("/logout", function (req, res)
     res.json(getUpdate);
   });
 });
-
 //end of logout area
 
 //update login state

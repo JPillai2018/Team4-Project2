@@ -3,51 +3,48 @@ $(document).ready(function()
   console.log("I am in Sign Up");
   // Getting references to our form and input
   var signUpForm = $("form.signup");
-  var usernameInput =$("input#username");
-  //var usernameInput ="defaultName";
   var emailInput = $("input#email");
   var passwordInput = $("input#password");
-  console.log("User Name=" + usernameInput);
-  console.log("Email=" + emailInput);
-  console.log("passwordInput=" + passwordInput);
+  var usersname = emailInput.val();
+  var username = usersname.substring(0, usersname.indexOf('@'));
   // When the signup button is clicked, validate the email and password are not blank
   signUpForm.on("submit", function(event) {
     event.preventDefault();
-    //forgot need to add true for logged : logged: true
+    var usersname = emailInput.val();
+    var username = usersname.substring(0, usersname.indexOf('@'));
     var userData = {
       email: emailInput.val(),
       password: passwordInput.val(),
-      userName: usernameInput.val(),
+      userName: username,
     };
 
-    if (!userData.email || !userData.password || !userData.userName) {
+    if (!userData.email || !userData.password) {
       alert("Invalid Credentials Entered!");
       return;
     }
     // If we have an email and password, run the signUpUser function
-    signUpUser(userData.email, userData.password, userData.userName);
+    signUpUser(userData);
     emailInput.val("");
     passwordInput.val("");
-    usernameInput.val("");
-
   });
 
   // Does a post to the signup route. If succesful, we are redirected to the members page
   // Otherwise we log any errors
-  function signUpUser(email, password, userName) {
+  function signUpUser(userData) {
+    localStorage.setItem("PetsTalkUser", userData.email);
     $.post("/api/signup", {
-      email: email,
-      password: password,
-      userName:userName
-    }).then(function(data) {
-      window.location.replace(data);
+      email: userData.email,
+      password: userData.password,
+      userName: userData.userName
+    }).then(userdata =>  {
+      window.location.replace("/login");
       // If there's an error, handle it by throwing up a boostrap alert
     }).catch(handleLoginErr);
   }
 
   function handleLoginErr(err) {
     $("#alert .msg").text(err.responseJSON);
-    $("#alert").fadeIn(500);
+    $("#alert").fadeIn(3500);
   }
 
 });
