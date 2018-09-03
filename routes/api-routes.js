@@ -6,25 +6,16 @@ module.exports = function(app) {
   // Using the passport.authenticate middleware. We are using local strategy for authentication.
   // If the user has valid login credentials, send them to the members page.
   // Otherwise the user will be sent an error
-  //app.post("/api/login", passport.authenticate("local", {successRedirect: "/members" , failureRedirect: "/login"}));
-  //** */
+  // app.post("/api/login", passport.authenticate("local", {successRedirect: "/members" , failureRedirect: "/login"}));
+  // Uses local strategy with email as user id and password
   app.post("/api/login", passport.authenticate("local"), function(req, res) {
-  
     res.json("/members");
   });
   //
-//   app.post('/api/login',
-//   passport.authenticate('local', { successRedirect: '/members',
-//                                    failureRedirect: '/login',
-//                                    failureFlash: "Password Violation!!!" })
-// );
-  // app.post("/api/login", passport.authenticate('local-login', {
-  //   successRedirect: "/members",
-  //   failureRedirect: "/login",
-  //   failureFlash: true
-  // }),
-  //   function(req, res){
-  // }
+  //   app.post('/api/login',
+  //   passport.authenticate('local', { successRedirect: '/members',
+  //                                    failureRedirect: '/login',
+  //                                    failureFlash: "Password Violation!!!" })
   // );
 
   //Route to login page if user failed to login. I created this to allow flash messages and not interfere with regular login route
@@ -34,33 +25,7 @@ module.exports = function(app) {
       res.redirect("/login");
     }
   });
-
   //
-  // app.post("/api/login", passport.authenticate("local", 
-  // { successRedirect: "/members", 
-  //   failureRedirect: "/login", 
-  //   failureMessage: "Invalid username or password" }));
-  //
-  // Passport Authentication
-  // app.post("/api/login", function(req, res, next) {
-  //   passport.authenticate('local', function(err, user, info) {
-  //     if (err) {
-  //       return next(err); // will generate a 500 error
-  //     }
-  //     // Generate a JSON response reflecting authentication status
-  //     if (! user) {
-  //       return res.send(401,{ success : false, message : 'authentication failed' });
-  //     }
-  //     req.login(user, function(err){
-  //       if(err){
-  //         return next(err);
-  //       }
-  //       return res.send({ success : true, message : 'authentication succeeded' });        
-  //     });
-  //   })(req, res, next);
-  // });
-
-//
   // Route for signing up a user/Creating a new User credential. 
   // The user's password is hashed and stored securely.
   // If the user is created successfully, proceed to log the user in page for logging in.
@@ -73,11 +38,7 @@ module.exports = function(app) {
       password: req.body.password,
       logged: true
     }).then(function() {
-      //res.json("/memberslogin");
-      //res.redirect(307, "/login");
       res.redirect(307, "/api/login");
-      //res.redirect(307, "/loginforsignup");
-      //res.redirect("/members");
     }).catch(function(err) {
       window.alert("Incorrect User Id or Password. Try Again");
       res.json(err);
@@ -95,7 +56,6 @@ module.exports = function(app) {
 app.get("/api/leave/", function(req, res) {
     // findAll returns all entries for a table when used with no options
     db.User.findAll({}).then(function(dbTodo) {
-      // We have access to the todos as an argument inside of the callback function
       res.json(dbTodo);
     });
     res.redirect("/logout");
@@ -104,6 +64,7 @@ app.get("/api/leave/", function(req, res) {
 //once logout update the logged state
 app.put("/logout", function (req, res)
 {
+  console.log("Let me logout...");
   db.User.update(
   { logged: false},
   {
@@ -123,11 +84,8 @@ app.put("/api/login", function (req, res)
     where: { email: req.body.email}
   }).then(function (getUpdate) {
     res.json(getUpdate);
-
   });
-
 });
-
 
 // Routes for Posts management
 // GET route for getting all of the posts

@@ -1,5 +1,6 @@
 // Javascript file to handle Blog related logic. 
 // Main operations include Add blog, Update blog, Delete blog
+//*****************************************************************************************/
 // Members Page- Create new Blog
 $(document).ready(function() {
     // Add Blog Button click control logic
@@ -42,9 +43,7 @@ $(document).ready(function() {
         title: titleInput.val().trim(),
         body: bodyInput.val().trim()
       };
-  
-      console.log(newPost);
-  
+      //console.log(newPost);
       // If we're updating a post run updatePost to update a post
       // Otherwise run submitPost to create a whole new post
       if (updating) {
@@ -117,9 +116,9 @@ $(document).ready(function() {
                 $("#body").val("");
             }
         }
-        console.log("New Post Button Value = " + newBlogStatus);
+        //console.log("New Post Button Value = " + newBlogStatus);
     }
-  
+    //*****************************************************************************************/
     // Members Page- Blog Management
     // blogContainer holds all of our posts
     var blogContainer = $(".blog-container");
@@ -259,4 +258,26 @@ $(document).ready(function() {
         getPosts(newPostCategory);
     }
 
+    // Following function Logs out a user and updates the Login/Logout Status in the database.
+    $('#logout').on("click", function () {
+        event.preventDefault();
+        //socket.disconnect();
+        var useremail = localStorage.getItem("PetsTalkUser");
+        //console.log("Logging of user =" + useremail);
+        //localStorage.removeItem("PetsTalkUser");    
+        var signoutData =
+        {
+            email:useremail,
+            logged:false
+        }
+
+        $.ajax({
+            method : "PUT",
+            url : "/logout",
+            data : signoutData
+        }).then(
+            window.location.replace("/allvisitors")
+        );
+    });
+    //*****************************************************************************************/
 });

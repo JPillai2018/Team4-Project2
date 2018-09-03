@@ -160,12 +160,13 @@ a h6{
 .card-header{
   height: 40px;
   background-color: #a1d7f8;
-  border-bottom-color: #0b08ee;
-  border-bottom-style: outset;
+  border-color: #0b08ee;
+  border-style: outset;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   font-size: x-small;
   text-align: center;
   padding: 3px;
+  border-radius: 10px;
 }
 
 .form-group label{
@@ -175,9 +176,20 @@ a h6{
 .card-body{
   padding: 2px;
   border-style: inset;
-  border-radius: 3px;
+  border-radius: 10px;
+  margin: 10px;
+}
+.card-body {
+  border-radius: 10px;
+  padding: 5px;
+  margin: 10px;
 }
 
+ .button-group-all .blog-container .mx-auto .card-body{
+  padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
+}
 .loginlogoutImg{
   width: 50%;
   height: 50%;
@@ -188,4 +200,8 @@ a h6{
 .button-group-all{
   overflow: auto;
   max-height: 200px;
+}
+
+.card .mx-auto{
+  padding: 10px;
 }
