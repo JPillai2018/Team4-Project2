@@ -1,14 +1,15 @@
 // Requiring bcrypt-nodejs for password hashing. 
+// Using the bcrypt-nodejs version as the regular bcrypt module
+// sometimes causes errors on Windows machines
 var bcrypt = require("bcrypt-nodejs");
 
-// Creating Serielize model for the database table User (for password management)
+// Creating our User model (for password management)
 module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define("User", {
     // The User Name cannot be null.
     userName:{
       type: DataTypes.STRING, 
-      allowNull: false,
-      unique: true
+      allowNull: false
     },
 
     // The email cannot be null, and must be a proper email before creation
@@ -27,24 +28,27 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
 
-    // Logged flag helps determine if the user is already logged in/ logged off
     logged: {
       type: DataTypes.BOOLEAN, 
       defaultValue:false
     }
 
-  }, 
-  {
+  }, {
     timestamps: false
   });
 
-  // Decrypting the Password (Hashing). 
-  // This will check if an unhashed password is entered by the user can be compared to the hashed password stored in our database
+  //  User.associate = function(models) {
+  //  User.hasMany(models.Blog, {
+  //     onDelete: "cascade"
+  //  });
+  //};
+
+  // Creating a custom method for our User model. This will check if an unhashed password entered by the user can be compared to the hashed password stored in our database
   User.prototype.validPassword = function(password) {
     return bcrypt.compareSync(password, this.password);
   };
   // Hooks are automatic methods that run during various phases of the User Model lifecycle
-  // Hashes the entered Password in Decrypt form by hashing
+  // In this case, before a User is created, we will automatically hash their password
   User.hook("beforeCreate", function(user) {
     user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
   });

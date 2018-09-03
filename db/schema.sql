@@ -15,12 +15,14 @@ CREATE TABLE users
 	PRIMARY KEY (id) 
 );
 
-CREATE TABLE blogs
+CREATE TABLE Posts
 (
-	emaildog int NOT NULL AUTO_INCREMENT,
-	dog_name varchar(50) NOT NULL,
-	parent_name varchar(50) NOT NULL,
+	id int NOT NULL AUTO_INCREMENT,
+	email varchar(255) NOT NULL,
+	title varchar(50) NOT NULL,
+	body text(50) NOT NULL,
 	blogPost varchar(255) NOT NULL,
-	PRIMARY KEY (emaildog),
-	FOREIGN KEY (emaildog) REFERENCES users(email)
+	categoty varchar(20),
+	createdAt CHAR(10),
+	updatedAt CHAR(10)
 );
