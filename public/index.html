@@ -14,9 +14,6 @@
 
             <!-- script for jquery -->
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <!-- link to css reset -->
-    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/reset.css" />
-
     <!-- link to bootstrap cdn -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
     <!-- Moment.js Reference -->
@@ -27,9 +24,12 @@
     <!-- link to css stylesheet -->
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
 
-    <!-- link to favicon image -->
-    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
-    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon" />
+    
+    <!-- link to social media buttons with fontawesome icon library -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+        crossorigin="anonymous" />
+
+        <link href="https://fonts.googleapis.com/css?family=Maven+Pro" rel="stylesheet">
 
 
     <style>
@@ -39,7 +39,12 @@
         }
         .blog-container{
             overflow: auto;
-            max-height: 1070px;
+            max-height: 920px;
+        }
+
+        .blog-container .card{
+            margin: 15px;
+            border-radius: 15px;
         }
     </style>
 </head>
@@ -51,30 +56,21 @@
         <div class="container-fluid header">
             <div class="row">
                 <div class="col">
-                    <img id="logo" src="assets/images/logo.png" />
+                    <img id="logo" src="../assets/images/logo.png" />
                 </div>
-                <div class="col" id="register">
-                    <h6>Not a Member?<br >Would you like to post about your pet and share an image?</h6>
-                    <h5>
-                        <a href="/signup">Signup HERE!</a>
-                    </h5>
-                    <br />
-                    <h6>Already a Member?<br >Sign in and tell us about your pet!</h6>
-                    <h5>
-                        <a href="/login">LOGIN HERE!</a>
-                    </h5>
+                <div class="col" id="headercenter">
+                    <img class="catpad" src="../assets/images/cat4.jpg" />
+                    <br /><br />
+                    <img src="../assets/images/dog2small.jpg" />
                     <br />
                 </div>
-                <div class="col bfad">
-                    <a href="https://bestfriends.org/about-best-friends/our-mission/save-them-all" target="_blank">
-                        <img src="assets/images/bfad.png" />
-                    </a>
-                    <p>Best Friends is nationwide animal rescue and advocacy organization, with spay neuter, TNR (trap neuter
-                        return), pet adoption and no-kill programs.</p>
-                </div>
-                <!-- <div>
-                    <p>Welcome Visitor!!!</p>
-                </div> -->
+                <div class="col" id="bfad">
+                        <a href="https://bestfriends.org/about-best-friends/our-mission/save-them-all" target="_blank">
+                            <img src="../assets/images/bfad.png" />
+                        </a>
+                        <p>Best Friends is nationwide animal rescue and advocacy organization, with spay neuter, TNR (trap neuter
+                            return), pet adoption and no-kill programs.</p>
+                    </div>
             </div>
         </div>
 
@@ -85,22 +81,14 @@
                         <a class="nav-link" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Dogs</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Cats</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Other Pets</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="/signup">Sign Up</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/login">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="/logout">Logout</a>
+                        <!-- <a class="nav-link disabled" href="/logout">Logout</a> -->
+                        <a class="nav-link disabled" >Logout</a>
                     </li>
                 </ul>
             </div>
@@ -159,29 +147,22 @@
                         <div class="card-header">
                             <ul class="nav nav-tabs card-header-tabs">
                                 <li class="nav-item">
-                                    <a class="nav-link active" href="#">DOGS</a>
+                                    <a class="nav-link active" href="https://www.akc.org/dog-breed-selector/" target="_blank">&#x1F436; DOGS &#x1F436;</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link active" href="#">CATS</a>
+                                    <a class="nav-link active" href="http://www.humanesociety.org/animals/cats/tips/choosing_cat.html" target="_blank">&#x1F431;CATS &#x1F431;</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link active" href="#">OTHER</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link active" href="#">PET LOVER CORNER</a>
+                                    <a class="nav-link active" href="https://bestfriends.org/resources/choosing-pet" target="_blank">&#x1F430;RABBITS and More&#x1F430;</a>
                                 </li>
                             </ul>
                         </div>
                         <div class="">
-                            <h5 class="card-title">Dogs</h5>
+                            <h5 class="card-title">Which Pet to Choose</h5>
                         </div>
 
-                        <img class="dogImg" src="assets/images/dog3.jpg" />
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                            et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-                            ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-                            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                            sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <img class="dogImg" src="assets/images/pets4.jpg" />
+                        <p>Choosing a pet for you and/or your family is a very big commitment. Let's Talk Pets has assembled information to help you with this big decision. Click on the links above to find information and guidance on choosing just the right pet. Read the posts below to see what current owners have to say about their pets.</p>
 
                     </div>
 
@@ -191,7 +172,7 @@
                         <div class="card text-center">
                         <div class="blogs-section">
                             <div>
-                                <h5 class="blog-title">Recent Posts</h5>
+                                <h5 class="blog-title">Pet Lovers Talk: Recent Posts</h5>
                             </div>
                         </div>
                         <br>
@@ -209,36 +190,29 @@
                 </div>
                 
                 <div class="col dogside text-center">
-                    <button type="button" class="btn btn-success joinNow">Register!</button>
-                    <br />
-                    <br />
+                    
                     <div class="card mx-auto" style="width: 24rem;">
                         <img class="card-img-top" src="assets/images/dog1.jpg" alt="Card image cap">
                         <div class="card-body">
-                            <p class="card-text">Dog ipsum dolor sit amet, tempor so accusantium minim yet quasi. Id eius consequatur laboriosam
-                                minima proident, and quae. Officia explicabo omnis yet numquam tempora so quae. Cillum. Nesciunt
-                                et cillum exercitationem or accusantium. Accusantium magni consectetur yet proident for laboris
-                                consequuntur so modi. Sed excepteur yet iste non or sunt and si.</p>
+                            <p class="card-text">Dogs were probably the first tame animals. They have accompanied humans for some 10,000 years. Some scientists assert that all dogs, domestic and wild, share a common ancestor in the small South Asian wolf.           
+                                Today humans have bred hundreds of different domestic dog breeds—some of which could never survive in the wild.</p>
+                                &#x1F43E;	&#x1F43E;	&#x1F43E;
                         </div>
                     </div>
                     <br />
                     <div class="card mx-auto" style="width: 24rem;">
                         <img class="card-img-top" src="assets/images/cat1.jpg" alt="Card image cap">
                         <div class="card-body">
-                            <p class="card-text">Cat ipsum dolor sit amet, tempor so accusantium minim yet quasi. Id eius consequatur laboriosam
-                                minima proident, and quae. Officia explicabo omnis yet numquam tempora so quae. Cillum. Nesciunt
-                                et cillum exercitationem or accusantium. Accusantium magni consectetur yet proident for laboris
-                                consequuntur so modi. Sed excepteur yet iste non or sunt and si.</p>
+                            <p class="card-text">Domestic cats, no matter their breed, are all members of one species.
+                                
+                                <em>Felis catus</em> has had a very long relationship with humans. Ancient Egyptians may have first domesticated cats as early as 4,000 years ago. Plentiful rodents probably drew wild felines to human communities. The cats' skill in killing them may have first earned the affectionate attention of humans.</p>&#x1F43E;	&#x1F43E;	&#x1F43E;
                         </div>
                     </div>
                     <br />
                     <div class="card mx-auto" style="width: 24rem;">
                         <img class="card-img-top" src="assets/images/rabbit1.jpg" alt="Card image cap">
                         <div class="card-body">
-                            <p class="card-text">Rabbit ipsum dolor sit amet, tempor so accusantium minim yet quasi. Id eius consequatur laboriosam
-                                minima proident, and quae. Officia explicabo omnis yet numquam tempora so quae. Cillum. Nesciunt
-                                et cillum exercitationem or accusantium. Accusantium magni consectetur yet proident for laboris
-                                consequuntur so modi. Sed excepteur yet iste non or sunt and si. </p>
+                            <p class="card-text">A domestic (or domesticated) rabbit (<em>Oryctolagus</em>), more commonly known as a pet rabbit, a bunny, or a bunny rabbit, is any of the domesticated varieties of the European rabbit species. They may be considered a pocket pet depending on their size. A male rabbit is a buck, a female is a doe, and a young rabbit is a kit or kitten. </p>&#x1F43E;	&#x1F43E;	&#x1F43E;
                         </div>
                     </div>
                 </div>
@@ -246,14 +220,70 @@
         </div>
     </div>
     <!-- close wrapper -->
-
+    <br>
+    <br>
     <!-- footer info -->
     <footer class="container-fluid">
 
-        <!-- copyright -->
-        <p id="copyright">Copyright &#169; 2018 &nbsp; &nbsp;
-        </p>
+        <div class="row rowonefoot">
+            <div class="col">
+                <img id="logo2" src="assets/images/logo2.png" width=50% />
+            </div>
+            <div class="col">
+                <img id="catdog" src="assets/images/catdog.jpg" />
+            </div>
+            <div class="col">
+                <p>Follow Us
+                    <br />
+                    <!-- font awesome social button icons -->
+                    <span class="social-icons">
+                        <a href="#" target="_blank" class="fab fa-instagram">
+                        </a>
+                    </span>
+                    <br />
+                    <span class="social-icons">
+                        <a href="#" target="_blank" class="fab fa-twitter">
+                        </a>
+                    </span>
+                    <br />
+                    <span class="social-icons">
+                        <a href="#" target="_blank" class="fab fa-facebook">
+                        </a>
+                    </span>
+                    <br />
+                    <span class="social-icons">
+                        <a href="#" target="_blank" class="fab fa-pinterest">
+                        </a>
+                    </span>
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <ul class="nav justify-content-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Advertise</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Terms of Use</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Privacy Policy</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact Us</a>
+                    </li>
+                </ul>
+                <p id="copyright">Copyright &#169; 2018 &nbsp; &nbsp;</p>
+            </div>
+        </div>
+
     </footer>
+    
 
 
     <!-- script for javascript-->

@@ -12,12 +12,7 @@ module.exports = function(app) {
     res.json("/members");
   });
   //
-  //   app.post('/api/login',
-  //   passport.authenticate('local', { successRedirect: '/members',
-  //                                    failureRedirect: '/login',
-  //                                    failureFlash: "Password Violation!!!" })
-  // );
-
+  
   //Route to login page if user failed to login. I created this to allow flash messages and not interfere with regular login route
   app.get("/loginfailed", function(req, res){
     if (!req.user){
@@ -31,7 +26,7 @@ module.exports = function(app) {
   // If the user is created successfully, proceed to log the user in page for logging in.
   // If the use is not able to be signed up, then send an error back.
   app.post("/api/signup", function(req, res) {
-    console.log ("User Data = " + req.body.userName + "=" + req.body.email + "=" + req.body.password);
+    //console.log ("User Data = " + req.body.userName + "=" + req.body.email + "=" + req.body.password);
     db.User.create({
       userName: req.body.userName,
       email: req.body.email,
@@ -40,7 +35,6 @@ module.exports = function(app) {
     }).then(function() {
       res.redirect(307, "/api/login");
     }).catch(function(err) {
-      window.alert("Incorrect User Id or Password. Try Again");
       res.json(err);
     });
   });
@@ -64,7 +58,6 @@ app.get("/api/leave/", function(req, res) {
 //once logout update the logged state
 app.put("/logout", function (req, res)
 {
-  console.log("Let me logout...");
   db.User.update(
   { logged: false},
   {
@@ -90,8 +83,9 @@ app.put("/api/login", function (req, res)
 // Routes for Posts management
 // GET route for getting all of the posts
 app.get("/api/posts/", function(req, res) {
-  db.Post.findAll({})
-    .then(function(dbPost) {
+  db.Post.findAll({
+    order:[["createdAt" , "DESC"]]
+  }).then(function(dbPost) {
       res.json(dbPost);
     });
 });
@@ -113,7 +107,8 @@ app.get("/api/posts/email/:email", function(req, res) {
   db.Post.findAll({
     where: {
       email: req.params.email
-    }
+    },
+    order:[["createdAt" , "DESC"]]
   })
     .then(function(dbPost) {
       res.json(dbPost);
@@ -171,7 +166,3 @@ app.put("/api/posts", function(req, res) {
     });
 });
 };
-
-
-
-

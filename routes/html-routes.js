@@ -19,7 +19,6 @@ module.exports = function(app)
 
   //login route
   app.get("/login", function(req, res) {
-    // res.sendFile(path.join(__dirname, "../public/html/login.html"));
     res.sendFile(path.join(__dirname, "../public/html/login.html"));
   });
 
@@ -50,14 +49,5 @@ module.exports = function(app)
   app.get("/blog", function(req, res) {
     res.sendFile(path.join(__dirname, "../public/html/members.html"))
   })
-
-  //New blogs route
-  //  app.get("/api/new", function (req, res) {
-  //   res.sendFile(path.join(__dirname, "../public/html/members.html"));
-  // });
-
-  // app.get("/api/newBlog", function (req, res) {
-  //   res.sendFile(path.join(__dirname, "../public/html/members.html"));
-  // });
 
 };
