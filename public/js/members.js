@@ -2,7 +2,7 @@
 // Main operations include Add blog, Update blog, Delete blog
 //*****************************************************************************************/
 // Members Page- Create new Blog
-$(document).ready(function() {
+$(document).ready(function () {
     // Add Blog Button click control logic
     var newPostYes = "No";
     var firstTime = "Yes";
@@ -18,97 +18,95 @@ $(document).ready(function() {
     var updating = false;
 
     if (url.indexOf("?post_id=") !== -1) {
-      postId = url.split("=")[1];
-      getPostData(postId);
+        postId = url.split("=")[1];
+        getPostData(postId);
     }
-  
+
     // Getting jQuery references to the post body, title, form, and category select
-    var bodyInput = $("#body");
+    var bodyInput = $("#formbody");
     var titleInput = $("#title");
     var blogForm = $("#blog");
 
     // Adding an event listener for when the form is submitted
     $(blogForm).on("submit", function handleFormSubmit(event) {
-      event.preventDefault();
-    // Get email from the session cookies.  
-      var blogEmail = localStorage.getItem("PetsTalkUser");
-      blogemail = blogEmail;
-      // Checking error for Posts
-      if (!titleInput.val().trim() || !bodyInput.val().trim()) {
-        return;
-      }
-      // Constructing a newPost object to hand to the database
-      var newPost = {
-        email: blogemail,
-        title: titleInput.val().trim(),
-        body: bodyInput.val().trim()
-      };
-      //console.log(newPost);
-      // If we're updating a post run updatePost to update a post
-      // Otherwise run submitPost to create a whole new post
-      if (updating) {
-        newPost.id = postId;
-        updatePost(newPost);
-      }
-      else {
-        submitPost(newPost);
-      }
+        event.preventDefault();
+        // Get email from the session cookies.  
+        var blogEmail = localStorage.getItem("PetsTalkUser");
+        blogemail = blogEmail;
+        // Checking error for Posts
+        if (!titleInput.val().trim() || !bodyInput.val().trim()) {
+            return;
+        }
+        // Constructing a newPost object to hand to the database
+        var newPost = {
+            email: blogemail,
+            title: titleInput.val().trim(),
+            body: bodyInput.val().trim()
+        };
+        //console.log(newPost);
+        // If we're updating a post run updatePost to update a post
+        // Otherwise run submitPost to create a whole new post
+        if (updating) {
+            newPost.id = postId;
+            updatePost(newPost);
+        }
+        else {
+            submitPost(newPost);
+        }
     });
-  
+
     // Submits a new post and brings user to blog page upon completion
     function submitPost(Post) {
-      $.post("/api/posts/", Post, function() {
-        newPostYes = "No";
-        window.location.href = "/blog";
-      });
+        $.post("/api/posts/", Post, function () {
+            newPostYes = "No";
+            window.location.href = "/members";
+        });
     }
-  
+
     // Gets post data for a post if we're editing
     function getPostData(id) {
-      $.get("/api/posts/" + id, function(data) {
-        if (data) {
-          // If this post exists, prefill our cms forms with its data
-          titleInput.val(data.title);
-          bodyInput.val(data.body);
-          // If we have a post with this id, set a flag for us to know to update the post
-          // when we hit submit
-          updating = true;
-          showhideblogwindow();
-        }
-      });
+        $.get("/api/posts/" + id, function (data) {
+            if (data) {
+                // If this post exists, prefill our cms forms with its data
+                titleInput.val(data.title);
+                bodyInput.val(data.body);
+                // If we have a post with this id, set a flag for us to know to update the post
+                // when we hit submit
+                updating = true;
+                showhideblogwindow();
+            }
+        });
     }
-  
+
     // Update a given post, bring user to the blog page when done
     function updatePost(post) {
-      $.ajax({
-        method: "PUT",
-        url: "/api/posts",
-        data: post
-      })
-        .then(function() {
-          window.location.href = "/blog";
-    });
+        $.ajax({
+            method: "PUT",
+            url: "/api/posts",
+            data: post
+        })
+            .then(function () {
+                window.location.href = "/blog";
+            });
     }
 
     // General functions
-    //Function to start the quizz game when Start button is clicked
-    function showhideblogwindow(){
+    function showhideblogwindow() {
 
         newBlogStatus = $("#newblogbtn").text();
-        if (firstTime === "Yes"){
+        if (firstTime === "Yes") {
             firstTime = "No";
             $("#newblogbtn").text("+Add New Post");
             $(".blog-content").css("display", "none");
             newPostYes = "No";
         }
-        else
-        {
-            if ((newBlogStatus === "+Add New Post") || (newPostYes=== "No") || (editPost=== "Yes")){
+        else {
+            if ((newBlogStatus === "+Add New Post") || (newPostYes === "No") || (editPost === "Yes")) {
                 $("#newblogbtn").text("-Cancel New Post");
                 $(".blog-content").css("display", "block");
                 newPostYes = "Yes";
             }
-            else if((newBlogStatus === "-Cancel New Post") || (newBlogStatus === "-Cancel Edit Post")){
+            else if ((newBlogStatus === "-Cancel New Post") || (newBlogStatus === "-Cancel Edit Post")) {
                 $("#newblogbtn").text("+Add New Post");
                 $(".blog-content").css("display", "none");
                 newPostYes = "No";
@@ -135,30 +133,30 @@ $(document).ready(function() {
     function getPosts(email) {
         var emailString = email || "";
         if (emailString) {
-        emailString = "/" + emailString;
+            emailString = "/" + emailString;
         }
-        $.get("/api/posts/email" + emailString, function(data) {
-        posts = data;
-        if (!posts || !posts.length) {
-            displayEmpty();
-        }
-        else {
-            initializeRows();
-            if (editPost === "Yes"){
-                showhideblogwindow()
-                editPost = "No";
+        $.get("/api/posts/email" + emailString, function (data) {
+            posts = data;
+            if (!posts || !posts.length) {
+                displayEmpty();
             }
-        }
+            else {
+                initializeRows();
+                if (editPost === "Yes") {
+                    showhideblogwindow()
+                    editPost = "No";
+                }
+            }
         });
     }
 
     // This function does an API call to delete posts
     function deletePost(id) {
         $.ajax({
-        method: "DELETE",
-        url: "/api/posts/" + id
+            method: "DELETE",
+            url: "/api/posts/" + id
         })
-        .then(function() {
+        .then(function () {
             getPosts(postCategorySelect.val());
         });
     }
@@ -169,7 +167,7 @@ $(document).ready(function() {
         blogContainer.empty();
         var postsToAdd = [];
         for (var i = 0; i < posts.length; i++) {
-        postsToAdd.push(createNewRow(posts[i]));
+            postsToAdd.push(createNewRow(posts[i]));
         }
         blogContainer.append(postsToAdd);
     }
@@ -189,13 +187,6 @@ $(document).ready(function() {
         var newPostTitle = $("<h4>");
         var newPostDate = $("<small>");
         var newPostCategory = $("<h5>");
-        //newPostCategory.text(post.category);
-        // newPostCategory.css({
-        // float: "right",
-        // "font-weight": "700",
-        // "margin-top":
-        // "-15px"
-        // });
         var newPostCardBody = $("<div>");
         newPostCardBody.addClass("card-body");
         var newPostBody = $("<p>");
@@ -222,9 +213,9 @@ $(document).ready(function() {
     // deletePost
     function handlePostDelete() {
         var currentPost = $(this)
-        .parent()
-        .parent()
-        .data("post");
+            .parent()
+            .parent()
+            .data("post");
         deletePost(currentPost.id);
     }
 
@@ -236,9 +227,9 @@ $(document).ready(function() {
         editPost = "Yes";
         $("#newblogbtn").text("-Cancel Edit");
         var currentPost = $(this)
-        .parent()
-        .parent()
-        .data("post");
+            .parent()
+            .parent()
+            .data("post");
         window.location.href = "/members?post_id=" + currentPost.id;
         showhideblogwindow();
     }
@@ -267,14 +258,14 @@ $(document).ready(function() {
         //localStorage.removeItem("PetsTalkUser");    
         var signoutData =
         {
-            email:useremail,
-            logged:false
+            email: useremail,
+            logged: false
         }
 
         $.ajax({
-            method : "PUT",
-            url : "/logout",
-            data : signoutData
+            method: "PUT",
+            url: "/logout",
+            data: signoutData
         }).then(
             window.location.replace("/allvisitors")
         );

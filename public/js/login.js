@@ -4,6 +4,8 @@ $(document).ready(function() {
   var emailInput = $("input#email");
   var passwordInput = $("input#password");
 
+  var lsmsg = localStorage.getItem("lsmsg");
+  console.log("Login Message =" + lsmsg);
   //FunctionloginForm passes in the email and password and creates a local storage
   //for user email, updates the logged state to true, and passes the email and
   //password to validate user login.
@@ -25,7 +27,7 @@ $(document).ready(function() {
     //update the login state to true
     updateLogState(userData.email);
     //if valid email and password go ahead and pass to loginUser function
-    console.log("Email4=" + userData.email + " Password4=" + userData.password);
+    //console.log("Email4=" + userData.email + " Password4=" + userData.password);
     loginUser(userData.email, userData.password);
     //clear out the values after logged in
     emailInput.val("");
@@ -41,9 +43,10 @@ $(document).ready(function() {
     })
     .then(function(data) {
       window.location.replace(data);
-    })
+    }).catch(handleLoginErr);
     
   }
+
   // Update the database to indicate the user is currently logged in.
   function updateLogState(email) 
   {
@@ -61,20 +64,6 @@ $(document).ready(function() {
   // .then(getUpdate);
   }
 
-  // function updateLogState(email) 
-  // {
-  // //update logged state to true
-  //   var updatelog=
-  //   {
-  //     email:email
-  //   }
-  // /// do the update for logged= true
-  // $.ajax({
-  //   method : "PUT",
-  //   url : "/api/login",
-  //   data: updatelog
-  // }).then(getUpdate);
-  // }
   // Saving Email/User Id in local storage
   function login() 
   {
@@ -87,12 +76,14 @@ $(document).ready(function() {
     //clear the email value
     $('#email').val(''); 
   }
-  //function getUpdate updates the user's setting once the user updates their 
-  //personal information
-  // function getUpdate() {
-  //   $.get("/api/update/", function(res) {
-  //     updateArr = res;
-  //   })
-  // }
+
+
+  function handleLoginErr(err) {
+
+    $(".alert").show();
+    $(".alert").fade(5000);
+
+  }
+
 });
 
